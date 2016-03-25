@@ -29,7 +29,9 @@ class SiteController extends Controller
      */
     public function index()
     {
-        //
+        $sites = DB::table('sites')->select('id', 'url', 'title', 'description')->get();
+
+		return view('websites', ['sites' => $sites]);
     }
 
     /**
@@ -53,7 +55,7 @@ class SiteController extends Controller
 			'keywords' => $request['site_keywords']
 		]);
 		
-		return $id;
+		return view('addwebsite', $id);
     }
 
     /**

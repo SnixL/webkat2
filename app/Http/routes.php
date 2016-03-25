@@ -17,6 +17,8 @@ Route::group(['middleware' => ['web']], function () {
         return view('welcome');
     });
 	
+	Route::get('/websites', 'SiteController@index');
+	
 	Route::get('/addwebsite', function () {
         return view('addwebsite');
     });
