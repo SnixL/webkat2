@@ -9,24 +9,15 @@
 
                 <div class="panel-body">
                 	@if (count($sites) > 0)
-                    	<table>
                         @foreach ($sites as $site)
-                            <tr>
-                                <td class="table-text col-md-3">
-                                    <div>{{ $site->url }}</div>
-                                </td>
-    							<td class="table-text col-md-3">
-                                    <div>{{ $site->title }}</div>
-                                </td>
-                                <td class="table-text col-md-6">
-                                    <div>{{ $site->description }}</div>
-                                </td>
-                                <td>
-                                    <!-- TODO: Delete Button -->
-                                </td>
-                            </tr>
+                        	<div class="panel-body">
+                                <div class="table-text col-md-3"><a href="{{ $site->url }}">BILD</a></div>
+                                <div class="table-text col-md-9">
+                                    <a href="{{ $site->url }}">{{ $site->title }}</a><br /><br />
+                                    {{ $site->description }}
+                                </div>
+                            </div>
                         @endforeach
-                        </table>
                     @endif
                 </div>
                 

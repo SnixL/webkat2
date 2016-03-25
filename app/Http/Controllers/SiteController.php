@@ -9,7 +9,7 @@ use App\Http\Requests;
 use DB;
 
 class SiteController extends Controller
-{
+{	
 	/**
 	* Show the application addwebsite.
 	*
@@ -22,6 +22,18 @@ class SiteController extends Controller
 		]);
     }
 	
+	 /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function sitelisting()
+    {
+        $sites = DB::table('sites')->select('id', 'url', 'title', 'description')->get();
+
+		return view('websites', ['sites' => $sites]);
+    }
+	
     /**
      * Display a listing of the resource.
      *
@@ -29,9 +41,7 @@ class SiteController extends Controller
      */
     public function index()
     {
-        $sites = DB::table('sites')->select('id', 'url', 'title', 'description')->get();
-
-		return view('websites', ['sites' => $sites]);
+		return view('addwebsite');
     }
 
     /**

@@ -10,29 +10,28 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+	Route::get('/', function () {
+        return view('welcome');
+    });
+	Route::get('/impressum', function () {
+		return view('impressum');
+	});
+
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::get('/', function () {
-        return view('welcome');
-    });
+	Route::get('/websites', 'SiteController@sitelisting');
 	
-	Route::get('/websites', 'SiteController@index');
-	
-	Route::get('/addwebsite', function () {
-        return view('addwebsite');
-    });
+	Route::get('/addwebsite', 'SiteController@index');
 	
 	Route::post('/addwebsite', 'SiteController@create');
 	
-	Route::get('/impressum', function () {
-        return view('impressum');
-    });
-
 });
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('/home', 'HomeController@index');
+	
 });
+
