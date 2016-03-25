@@ -16,6 +16,14 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/', function () {
         return view('welcome');
     });
+	
+	Route::get('/addwebsite', function () {
+        return view('addwebsite');
+    });
+	
+	Route::get('/impressum', function () {
+        return view('impressum');
+    });
 
 });
 

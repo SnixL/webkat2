@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'de',
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'de',
 
     /*
     |--------------------------------------------------------------------------
@@ -203,5 +203,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
-
+	
+	'name' => 'Webkatalog'
 ];
