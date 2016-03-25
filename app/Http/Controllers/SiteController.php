@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use DB;
+
 class SiteController extends Controller
 {
 	/**
@@ -44,7 +46,14 @@ class SiteController extends Controller
 			'site_keywords'   	=> ''
 		]);
 		
-
+		$id = DB::table('sites')->insertGetId([
+			'url' => $request['site_url'], 
+			'title' => $request['site_title'], 
+			'description' => $request['site_description'], 
+			'keywords' => $request['site_keywords']
+		]);
+		
+		return $id;
     }
 
     /**

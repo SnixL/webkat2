@@ -14,8 +14,8 @@ class CreateSiteTable extends Migration
     {
 		Schema::create('sites', function (Blueprint $table) {
             $table->increments('id');
-			$table->integer('user_id')->unsigned();
-			$table->string('url')->unique();;
+			$table->integer('user_id');
+			$table->string('url')->unique();
             $table->string('title');
             $table->text('description');
 			$table->text('keywords');
@@ -25,8 +25,6 @@ class CreateSiteTable extends Migration
 			$table->dateTime('check_date');
 			$table->bigInteger('clicks');
             $table->timestamps();
-			
-			$table->foreign('user_id')->references('id')->on('users');
         });
     }
 
