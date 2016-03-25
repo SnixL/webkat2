@@ -55,7 +55,7 @@ class SiteController extends Controller
 			'keywords' => $request['site_keywords']
 		]);
 		
-		return view('addwebsite', $id);
+		return view('addwebsite', ['lastid' => $id]);
     }
 
     /**

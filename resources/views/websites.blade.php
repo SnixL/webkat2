@@ -9,15 +9,16 @@
 
                 <div class="panel-body">
                 	@if (count($sites) > 0)
+                    	<table>
                         @foreach ($sites as $site)
                             <tr>
-                                <td>
+                                <td class="table-text col-md-3">
                                     <div>{{ $site->url }}</div>
                                 </td>
-    							<td>
+    							<td class="table-text col-md-3">
                                     <div>{{ $site->title }}</div>
                                 </td>
-                                <td>
+                                <td class="table-text col-md-6">
                                     <div>{{ $site->description }}</div>
                                 </td>
                                 <td>
@@ -25,6 +26,7 @@
                                 </td>
                             </tr>
                         @endforeach
+                        </table>
                     @endif
                 </div>
                 
