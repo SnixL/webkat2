@@ -8,7 +8,7 @@
                 <div class="panel-heading">Webseite eintragen</div>
 
                 <div class="panel-body">
-                    {!! Form::open(array('action' => 'HomeController@sendwebsite', 'method' => 'post', 'class' => 'form-horizontal')) !!}
+                    {!! Form::open(array('action' => 'SiteController@create', 'method' => 'post', 'class' => 'form-horizontal')) !!}
                    		{!! csrf_field() !!}
                      
                         <div class="form-group{{ $errors->has('site_url') ? ' has-error' : '' }}">

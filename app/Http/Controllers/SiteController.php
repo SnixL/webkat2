@@ -8,6 +8,18 @@ use App\Http\Requests;
 
 class SiteController extends Controller
 {
+	/**
+	* Show the application addwebsite.
+	*
+	* @return \Illuminate\Http\Response
+	*/
+    public function readMetadata(Request $request)
+    {
+        $this->validate($request, [
+			'site_url'  		=> 'Required|Between:12,255,Url'
+		]);
+    }
+	
     /**
      * Display a listing of the resource.
      *
@@ -23,9 +35,16 @@ class SiteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+    	$this->validate($request, [
+			'site_url'  		=> 'Required|Between:12,255,Url',
+			'site_title'   		=> 'Required|Between:8,255',
+			'site_description'	=> 'Required|Between:3,2048',
+			'site_keywords'   	=> ''
+		]);
+		
+
     }
 
     /**

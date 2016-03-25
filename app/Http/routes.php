@@ -21,6 +21,8 @@ Route::group(['middleware' => ['web']], function () {
         return view('addwebsite');
     });
 	
+	Route::post('/addwebsite', 'SiteController@create');
+	
 	Route::get('/impressum', function () {
         return view('impressum');
     });
