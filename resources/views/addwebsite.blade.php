@@ -8,8 +8,7 @@
                 <div class="panel-heading">Webseite eintragen</div>
 
                 <div class="panel-body">
-                	<form class="form-horizontal" role="form" method="POST" action="{{ url('/addwebsite') }}">
-                    <!-- {!! Form::open(array('action' => 'HomeController@sendwebsite', 'method' => 'post', 'class' => 'form-horizontal')) !!} -->
+                    {!! Form::open(array('action' => 'HomeController@sendwebsite', 'method' => 'post', 'class' => 'form-horizontal')) !!}
                    		{!! csrf_field() !!}
                      
                         <div class="form-group{{ $errors->has('site_url') ? ' has-error' : '' }}">
@@ -78,8 +77,7 @@
                                 </button>
                             </div>
                         </div>
-                	<!-- {!! Form::close() !!} -->
-                    </form>
+                	{!! Form::close() !!}
                 </div>
             </div>
         </div>
