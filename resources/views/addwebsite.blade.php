@@ -15,8 +15,8 @@
                                 <label class="col-md-4 control-label">Domain / URL:</label>
     
                                 <div class="col-md-6">
-                   					<input type="text" class="form-control" name="site_url" size="70" value="{{ old('site_url') }}" />
-                                    <button class="btn" name="load_meta" value="1">
+                                	<input type="text" class="form-control" name="site_url" size="70" value="{{ isset($metadata['meta_url']) ? $metadata['meta_url'] : old('site_url') }}" />
+                                    <button type="submit" class="btn" name="load_meta" value="1">
                                     	<i class="fa fa-btn fa-refresh"></i> Metadaten laden
                                		</button>
                                 
@@ -25,6 +25,7 @@
                                         <strong>{{ $errors->first('site_url') }}</strong>
                                     </span>
                                 @endif
+                                {{ isset($metadata['meta_info']) ? $metadata['meta_info'] : 'no data' }}
                             </div>
                         </div>
                         
@@ -32,7 +33,7 @@
                             <label class="col-md-4 control-label">Title:</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="site_title" value="{{ old('site_title') }}" />
+                                    <input type="text" class="form-control" name="site_title" value="{{ isset($metadata['meta_title']) ? $metadata['meta_title'] : old('site_title') }}" />
 
                                 @if ($errors->has('site_title'))
                                     <span class="help-block">
@@ -46,7 +47,7 @@
                             <label class="col-md-4 control-label">Description:</label>
 
                             <div class="col-md-6">
-                                <textarea class="form-control" name="site_description" cols="85" rows="5">{{ old('site_title') }}</textarea>
+                                <textarea class="form-control" name="site_description" cols="85" rows="5">{{ isset($metadata['meta_description']) ? $metadata['meta_description'] : old('site_description') }}</textarea>
 
                                 @if ($errors->has('site_description'))
                                     <span class="help-block">
@@ -60,7 +61,7 @@
                             <label class="col-md-4 control-label">Keywords:</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="site_keywords" value="{{ old('site_keywords') }}" />
+                                <input type="text" class="form-control" name="site_keywords" value="{{ isset($metadata['meta_keywords']) ? $metadata['meta_keywords'] : old('site_keywords') }}" />
 
                                 @if ($errors->has('site_keywords'))
                                     <span class="help-block">
@@ -72,7 +73,7 @@
                         
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary" >
+                                <button type="submit" name="addsitenow" class="btn btn-primary" >
                                     <i class="fa fa-btn fa-save"></i> Webseite jetzt eintragen
                                 </button>
                             </div>

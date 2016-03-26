@@ -20,6 +20,29 @@ class SiteController extends Controller
         $this->validate($request, [
 			'site_url'  		=> 'Required|Between:12,255,Url'
 		]);
+		
+		$host = $request['site_url']; 
+		$base_url = parse_url($request['site_url']); 
+		$base_url = $base_url['scheme'].'://'.$base_url['host'].'/'; 
+		
+		if(!(@$filestring = file_get_contents($host))) { 
+			$sitemeta['meta_info'] = 'ERROR: URL ('.$host.') NOT VALID OR OFFLINE'; 
+			
+		} else {
+			
+			$sitemeta['meta_url'] = $host;
+		
+			preg_match('/<title>(.*)<\/title>/U', $filestring, $title);
+	
+			$sitemeta['meta_title'] = utf8_decode(trim($title['1']));
+	
+			$metatags = get_meta_tags($host);
+			$sitemeta['meta_description'] = utf8_decode(trim($metatags['description']));
+			$sitemeta['meta_keywords'] = utf8_decode(trim($metatags['keywords']));
+			$sitemeta['meta_info'] = 'OK: ('.$host.') VALID URL'; 
+			
+		}
+		return $sitemeta;
     }
 	
 	 /**
@@ -51,21 +74,32 @@ class SiteController extends Controller
      */
     public function create(Request $request)
     {
-    	$this->validate($request, [
-			'site_url'  		=> 'Required|Between:12,255,Url',
-			'site_title'   		=> 'Required|Between:8,255',
-			'site_description'	=> 'Required|Between:3,2048',
-			'site_keywords'   	=> ''
-		]);
-		
-		$id = DB::table('sites')->insertGetId([
-			'url' => $request['site_url'], 
-			'title' => $request['site_title'], 
-			'description' => $request['site_description'], 
-			'keywords' => $request['site_keywords']
-		]);
-		
-		return view('addwebsite', ['lastid' => $id]);
+	
+		if(isset($request['load_meta'])){
+			
+			$site_meta = $this->readMetadata($request);
+
+			return view('addwebsite', ['metadata' => $site_meta]);
+		}
+	
+		if(isset($request['addsitenow'])){
+			
+			$this->validate($request, [
+				'site_url'  		=> 'Required|Between:12,255,Url',
+				'site_title'   		=> 'Required|Between:8,255',
+				'site_description'	=> 'Required|Between:3,2048',
+				'site_keywords'   	=> ''
+			]);
+			
+			$id = DB::table('sites')->insertGetId([
+				'url' => $request['site_url'], 
+				'title' => $request['site_title'], 
+				'description' => $request['site_description'], 
+				'keywords' => $request['site_keywords']
+			]);
+			
+			return view('addwebsite', ['lastid' => $id]);
+		}
     }
 
     /**
