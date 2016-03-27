@@ -4,10 +4,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">Webseiten</div>
+            <div class="panel panel-default text-center">
+                <div class="panel-heading text-left">Webseiten</div>
 
-                <div class="panel-body">
+                <div class="panel-body text-left">
                 	@if (count($sites) > 0)
                         @foreach ($sites as $site)
                         	<div class="panel-body">
@@ -20,7 +20,7 @@
                         @endforeach
                     @endif
                 </div>
-                
+               {!! $sites->links() !!}
             </div>
         </div>
     </div>

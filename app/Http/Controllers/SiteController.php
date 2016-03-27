@@ -26,7 +26,7 @@ class SiteController extends Controller
 		$base_url = $base_url['scheme'].'://'.$base_url['host'].'/'; 
 		
 		if(!(@$filestring = file_get_contents($host))) { 
-			$sitemeta['meta_info'] = 'ERROR: URL ('.$host.') NOT VALID OR OFFLINE'; 
+			$sitemeta['meta_info'] = 'ERROR: URL NOT VALID OR OFFLINE'; 
 			
 		} else {
 			
@@ -39,7 +39,7 @@ class SiteController extends Controller
 			$metatags = get_meta_tags($host);
 			$sitemeta['meta_description'] = utf8_decode(trim($metatags['description']));
 			$sitemeta['meta_keywords'] = utf8_decode(trim($metatags['keywords']));
-			$sitemeta['meta_info'] = 'OK: ('.$host.') VALID URL'; 
+			$sitemeta['meta_info'] = 'OK: VALID URL'; 
 			
 		}
 		return $sitemeta;
@@ -52,7 +52,7 @@ class SiteController extends Controller
      */
     public function sitelisting()
     {
-        $sites = DB::table('sites')->select('id', 'url', 'title', 'description')->get();
+        $sites = DB::table('sites')->select('id', 'url', 'title', 'description')->paginate(5);
 
 		return view('websites', ['sites' => $sites]);
     }
@@ -87,15 +87,24 @@ class SiteController extends Controller
 			$this->validate($request, [
 				'site_url'  		=> 'Required|Between:12,255,Url',
 				'site_title'   		=> 'Required|Between:8,255',
-				'site_description'	=> 'Required|Between:3,2048',
-				'site_keywords'   	=> ''
+				'site_description'	=> 'Required|Between:3,2048'
 			]);
+			
+			/**
+			 * User-ID für den Eintrag in sites ermitteln
+			 */
+			if(Auth::guest()) {
+				$uid = 0;
+			} else {
+				$uid = Auth::user()->id;
+			}
 			
 			$id = DB::table('sites')->insertGetId([
 				'url' => $request['site_url'], 
 				'title' => $request['site_title'], 
 				'description' => $request['site_description'], 
-				'keywords' => $request['site_keywords']
+				'keywords' => $request['site_keywords'], 
+				'user_id' => $uid
 			]);
 			
 			return view('addwebsite', ['lastid' => $id]);

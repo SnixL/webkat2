@@ -12,7 +12,7 @@
                    		{!! csrf_field() !!}
                      
                         <div class="form-group{{ $errors->has('site_url') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Domain / URL:</label>
+                                <label class="col-md-4 control-label">Domain / URL: </label>
     
                                 <div class="col-md-6">
                                 	<input type="text" class="form-control" name="site_url" size="70" value="{{ isset($metadata['meta_url']) ? $metadata['meta_url'] : old('site_url') }}" />
