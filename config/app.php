@@ -77,8 +77,8 @@ return [
     | the language folders that are provided through your application.
     |
     */
-
-    'fallback_locale' => 'de',
+	
+    'fallback_locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------

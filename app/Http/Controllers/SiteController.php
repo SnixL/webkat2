@@ -8,6 +8,8 @@ use App\Http\Requests;
 
 use DB;
 
+use Auth;
+
 class SiteController extends Controller
 {	
 	/**
