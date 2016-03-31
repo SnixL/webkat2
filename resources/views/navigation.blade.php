@@ -23,12 +23,22 @@
                 
                 <!-- @include('category')-->
                 
-                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Websiten<b class="caret"></b></a>
+                <li class="dropdown"><a href="{{ url('/websites') }}" class="dropdown-toggle" data-toggle="dropdown">Kategorien<b class="caret"></b></a>
                 	<ul class="dropdown-menu">
-                        <li><a href="{{ url('/websites') }}">Websiten</a></li>
-                        <li><a href="{{ url('/addwebsite') }}">Webseite eintragen</a></li>
+                        <li><a href="{{ url('/beruf-und-karriere') }}">Beruf und Karriere</a></li>
+                        <li><a href="{{ url('/finanzen-und-versicherung') }}">Finanzen und Versicherung</a></li>
+                        <li><a href="{{ url('/firmen-und-vereine') }}">Firmen und Vereine</a></li>
+                        <li><a href="{{ url('/flora-und-fauna') }}">Flora und Fauna</a></li>
+                        <li><a href="{{ url('/hobby-und-freizeit') }}">Hobby und Freizeit</a></li>
+                        <li><a href="{{ url('/kaufen-und-verkaufen') }}">Kaufen und Verkaufen</a></li>
+                        <li><a href="{{ url('/kunst-und-kultur') }}">Kunst und Kultur</a></li>
+                        <li><a href="{{ url('/technik-und-mobiles') }}">Technik und Mobiles</a></li>
+                        <li><a href="{{ url('/urlaub-und-reisen') }}">Urlaub und Reisen</a></li>
+                        <li><a href="{{ url('/wissenschaft-und-forschung') }}">Wissenschaft und Forschung</a></li>
+                        <li><a href="{{ url('/wohnen-und-leben') }}">Wohnen und Leben</a></li>
                     </ul>
                 </li>
+                <li><a href="{{ url('/addwebsite') }}">Webseite eintragen</a></li>
                 <li><a href="{{ url('/impressum') }}">Impressum</a></li>
             </ul>
 
@@ -45,6 +55,7 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
+                        	<li><a href="{{ url('/mysites') }}"><i class="fa fa-btn"></i>Meine Seiten</a></li>
                             <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                         </ul>
                     </li>

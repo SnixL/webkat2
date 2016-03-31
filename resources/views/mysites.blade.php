@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default text-center">
-                <div class="panel-heading text-left">Webseiten</div>
+                <div class="panel-heading text-left">Meine Webseiten</div>
 
                 <div class="panel-body text-left">
                 	@if (count($sites) > 0)

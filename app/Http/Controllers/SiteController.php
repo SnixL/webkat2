@@ -15,6 +15,7 @@ class SiteController extends Controller
 	/**
 	* Show the application addwebsite.
 	*
+	* @param  \Illuminate\Http\Request  $request
 	* @return \Illuminate\Http\Response
 	*/
     public function readMetadata(Request $request)
@@ -59,6 +60,34 @@ class SiteController extends Controller
 		return view('websites', ['sites' => $sites]);
     }
 	
+	/**
+     * Display a listing of the resource from Auth-Users.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function mysites()
+    {
+		if(Auth::guest()) {
+
+		} else {
+			$sites = DB::table('sites')->select('id', 'url', 'title', 'description')->where('user_id', '=', Auth::user()->id)->paginate(5);
+	
+			return view('mysites', ['sites' => $sites]);
+		}
+    }
+	
+	/**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function catsites($category)
+    {
+        $sites = DB::table('sites')->select('id', 'url', 'title', 'description')->where('user_id', '=', Auth::user()->id)->paginate(5);
+
+		return view('mywebsites', ['sites' => $sites]);
+    }
+	
     /**
      * Display a listing of the resource.
      *
@@ -72,6 +101,7 @@ class SiteController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+	 * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
