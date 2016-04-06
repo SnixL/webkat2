@@ -8,8 +8,6 @@ use App\Http\Requests;
 
 use App\Site;
 
-use DB;
-
 use Auth;
 
 class SiteController extends Controller
@@ -52,6 +50,23 @@ class SiteController extends Controller
 			
 		}
 		return $sitemeta;
+    }
+	
+	/**
+     * Display a listing of the resource from Auth-Users.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function newsites()
+    {
+		if(Auth::guest()) {
+
+		} else {
+			
+			$sites = Site::where('check', 0)->orderBy('title', 'desc')->paginate(5);
+	
+			return view('newsites', ['sites' => $sites]);
+		}
     }
 	
 	 /**

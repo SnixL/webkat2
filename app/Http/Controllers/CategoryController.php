@@ -6,10 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use DB;
+use App\Category;
 
 class CategoryController extends Controller
 {
+	
 	/**
      * Create a new controller instance.
      *
@@ -17,11 +18,12 @@ class CategoryController extends Controller
      */
     public function __construct()
     {
-        $categories = DB::table('categories')->select('url', 'name')->get();
+		//
+		$categories = Category::where('parent','=', '0')->pluck('id', 'name', url);
 
-		//$hersteller = Hersteller::lists('name', 'id');
-		return View::make('category')->with('categories', $categories);
+		return view('category', $categories);
     }
+	
     /**
      * Display a listing of the resource.
      *
@@ -30,6 +32,9 @@ class CategoryController extends Controller
     public function index()
     {
         //
+		$categories = Category::where('parent','=', '0')->pluck('id', 'name', url);
+
+		return view('category', $categories);
     }
 
     /**

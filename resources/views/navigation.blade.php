@@ -21,8 +21,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="{{ url('/home') }}">Home</a></li>
                 
-                <!-- @include('category')-->
-                
+                @include('category')
                 
                 <li class="dropdown"><a href="{{ url('/websites') }}" class="dropdown-toggle" data-toggle="dropdown">Kategorien<b class="caret"></b></a>
                 	<ul class="dropdown-menu">

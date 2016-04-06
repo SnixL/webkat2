@@ -14,6 +14,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+		view()->composer('categorie', function($view) {
+			$view->with('categories',  CategoryController::index());
+		});
     }
 
     /**

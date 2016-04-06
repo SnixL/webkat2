@@ -35,5 +35,7 @@ Route::group(['middleware' => 'web'], function () {
 	
 	Route::get('/mysites', 'SiteController@mysites');
 	
+	Route::get('/newsites', 'SiteController@newsites');
+	
 });
 
