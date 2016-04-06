@@ -23,6 +23,7 @@
                 
                 <!-- @include('category')-->
                 
+                
                 <li class="dropdown"><a href="{{ url('/websites') }}" class="dropdown-toggle" data-toggle="dropdown">Kategorien<b class="caret"></b></a>
                 	<ul class="dropdown-menu">
                         <li><a href="{{ url('/beruf-und-karriere') }}">Beruf und Karriere</a></li>
@@ -56,6 +57,9 @@
 
                         <ul class="dropdown-menu" role="menu">
                         	<li><a href="{{ url('/mysites') }}"><i class="fa fa-btn"></i>Meine Seiten</a></li>
+                            @if (Auth::user()->isAdmin)
+                            	<li><a href="{{ url('/newsites') }}"><i class="fa fa-btn"></i>Neue Seiten</a></li>
+                            @endif
                             <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                         </ul>
                     </li>
