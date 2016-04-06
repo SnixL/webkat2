@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\Site;
+
 use DB;
 
 use Auth;
@@ -40,8 +42,12 @@ class SiteController extends Controller
 			$sitemeta['meta_title'] = utf8_decode(trim($title['1']));
 	
 			$metatags = get_meta_tags($host);
-			$sitemeta['meta_description'] = utf8_decode(trim($metatags['description']));
-			$sitemeta['meta_keywords'] = utf8_decode(trim($metatags['keywords']));
+			if(isset($metatags['description'])) {
+				$sitemeta['meta_description'] = utf8_decode(trim($metatags['description']));
+			}
+			if(isset($metatags['keywords'])) {
+				$sitemeta['meta_keywords'] = utf8_decode(trim($metatags['keywords']));
+			}
 			$sitemeta['meta_info'] = 'OK: VALID URL'; 
 			
 		}
@@ -55,7 +61,9 @@ class SiteController extends Controller
      */
     public function sitelisting()
     {
-        $sites = DB::table('sites')->select('id', 'url', 'title', 'description')->paginate(5);
+        //$sites = DB::table('sites')->select('id', 'url', 'title', 'description')->paginate(5);
+		
+		$sites = Site::where('check', 0)->orderBy('title', 'desc')->paginate(5);
 
 		return view('websites', ['sites' => $sites]);
     }
@@ -70,7 +78,9 @@ class SiteController extends Controller
 		if(Auth::guest()) {
 
 		} else {
-			$sites = DB::table('sites')->select('id', 'url', 'title', 'description')->where('user_id', '=', Auth::user()->id)->paginate(5);
+			//$sites = DB::table('sites')->select('id', 'url', 'title', 'description')->where('user_id', '=', Auth::user()->id)->paginate(5);
+			
+			$sites = Site::where('user_id', '=', Auth::user()->id)->orderBy('title', 'desc')->paginate(5);
 	
 			return view('mysites', ['sites' => $sites]);
 		}
@@ -83,7 +93,9 @@ class SiteController extends Controller
      */
     public function catsites($category)
     {
-        $sites = DB::table('sites')->select('id', 'url', 'title', 'description')->where('user_id', '=', Auth::user()->id)->paginate(5);
+        //$sites = DB::table('sites')->select('id', 'url', 'title', 'description')->where('user_id', '=', Auth::user()->id)->paginate(5);
+		
+		$sites = Site::where('user_id', '=', Auth::user()->id)->orderBy('title', 'desc')->paginate(5);
 
 		return view('mywebsites', ['sites' => $sites]);
     }
@@ -130,7 +142,7 @@ class SiteController extends Controller
 			} else {
 				$uid = Auth::user()->id;
 			}
-			
+			/*
 			$id = DB::table('sites')->insertGetId([
 				'url' => $request['site_url'], 
 				'title' => $request['site_title'], 
@@ -138,8 +150,18 @@ class SiteController extends Controller
 				'keywords' => $request['site_keywords'], 
 				'user_id' => $uid
 			]);
+			*/
+			$site = new Site;
+
+        	$site->url = $request->site_url;
+			$site->title = $request->site_title;
+			$site->description = $request->site_description;
+			$site->keywords = $request->site_url;
+			$site->user_id = $uid;
+
+        	$site->save();
 			
-			return view('addwebsite', ['lastid' => $id]);
+			return view('addwebsite', ['lastid' => $site->id]);
 		}
     }
 
